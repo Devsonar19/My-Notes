@@ -2,7 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:test_application/views/login_view.dart';
+import 'package:test_application/views/register_view.dart';
+import 'package:test_application/views/verify_email_view.dart';
 import 'firebase_options.dart';
+
 
 //MAIN FUNCTION
 void main() {
@@ -12,6 +15,10 @@ void main() {
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.green),
       home: const HomePage(),
+      routes: {
+        '/login/': (context)=> LoginView(),
+        '/register/': (context)=> RegisterView()
+      },
 
     ),
   );
@@ -21,30 +28,33 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('HOME')),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              final user= FirebaseAuth.instance.currentUser;
-              if(user?.emailVerified ?? false){
-                print('You are a Verified User');
-              }else{
-                print('You are not Verified, verify first');
-              }
-              return const Text('Done');
-            default:
-              return const Text('Loading...');
-          }
-        },
+    return FutureBuilder(
+      future: Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
       ),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.done:
+          final user= FirebaseAuth.instance.currentUser;
+          if(user!=null){
+            if(user.emailVerified){
+              print('Email is Verified');
+            }else{
+              return const VerifyEmailView();
+            }
+          }else{
+            return const LoginView();
+          }
+          return const Text('Done');
+          default:
+            return const CircularProgressIndicator();
+        }
+      },
     );
   }
 }
+
+
 
 
 
