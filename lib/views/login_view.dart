@@ -1,8 +1,9 @@
 //LOGIN VIEW
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import '../firebase_options.dart';
+import 'dart:developer' as devtools show log;
+
+import '../constants/routes.dart';
 
 
 
@@ -61,19 +62,31 @@ class _LoginViewState extends State<LoginView> {
             onPressed: () async {
               final email = _email.text;
               final password = _password.text;
-              final userCredentials = await FirebaseAuth.instance
-                  .signInWithEmailAndPassword(
-                email: email,
-                password: password,
-              );
-              print(userCredentials);
+              try { // Start of the try block
+                await FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
+                  email: email,
+                  password: password,
+                );
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    notesRoute,
+                    (route) => false,
+                );
+              } on FirebaseAuthException catch (e) { // The catch block
+                if (e.code == 'user-not-found') {
+                  devtools.log('No user found for that email.');
+                } else if (e.code == 'wrong-password') {
+                  devtools.log('Wrong password provided for that user.');
+                }
+              }
             },
             child: const Text('Login'),
           ),
           TextButton(
             onPressed: (){
-              Navigator.of(context).pushNamedAndRemoveUntil('/register/',
-                      (route)=> false
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  registerRoute,
+                  (route)=> false
               );
             },child: const Text('Not Registered? Register Here!'),
           ),
@@ -82,8 +95,3 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
