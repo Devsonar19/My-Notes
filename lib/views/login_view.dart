@@ -1,4 +1,3 @@
-//LOGIN VIEW
 import 'package:flutter/material.dart';
 import 'package:test_application/services/auth/auth_service.dart';
 
@@ -7,7 +6,7 @@ import '../services/auth/auth_exceptions.dart';
 import '../utilities/show_error_dialog.dart';
 
 
-
+//LOGIN VIEW
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
 
@@ -63,26 +62,27 @@ class _LoginViewState extends State<LoginView> {
             onPressed: () async {
               final email = _email.text;
               final password = _password.text;
-              try { // Start of the try block
+              try {
                 await AuthService.firebase().logIn(
                     email: email,
                     password: password
                 );
                 final user = AuthService.firebase().currentUser;
                 if(user?.isEmailVerified ?? false){
-                  //user email is verified
+                  //user email is verified => notesRoute
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     notesRoute,
                         (route) => false,
                   );
                 }else{
-                  //user email is not verified
+                  //user email is not verified => verifyEmailRoute
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     verifyEmailRoute,
                         (route) => false,
                   );
                 }
 
+                //Exception Handling
               } on UserNotFoundAuthException {
                 await showErrorDialog(
                   context,
@@ -104,6 +104,7 @@ class _LoginViewState extends State<LoginView> {
           ),
           TextButton(
             onPressed: (){
+              //To registerRoute
               Navigator.of(context).pushNamedAndRemoveUntil(
                   registerRoute,
                   (route)=> false

@@ -1,4 +1,3 @@
-//REGISTRATION VIEW
 import 'package:flutter/material.dart';
 import 'package:test_application/services/auth/auth_service.dart';
 
@@ -8,7 +7,7 @@ import '../constants/routes.dart';
 import '../services/auth/auth_exceptions.dart';
 
 
-
+//REGISTRATION VIEW
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
@@ -70,6 +69,7 @@ class _RegisterViewState extends State<RegisterView> {
                 );
                 AuthService.firebase().sendEmailVerification();
                 Navigator.of(context).pushNamed(verifyEmailRoute);
+                //Exception Handling
               } on WeakPasswordAuthException {
                 await showErrorDialog(
                   context,
@@ -96,6 +96,7 @@ class _RegisterViewState extends State<RegisterView> {
           ),
           TextButton(
             onPressed: (){
+              //To loginRoute
               Navigator.of(context).pushNamedAndRemoveUntil('/login/',
                       (route)=> false
               );

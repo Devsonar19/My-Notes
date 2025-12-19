@@ -4,7 +4,7 @@ import '../constants/routes.dart';
 import '../enums/menu_action.dart';
 import '../services/auth/auth_service.dart';
 
-//Notes View
+//NOTES VIEW
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
 
@@ -26,6 +26,7 @@ class _NotesViewState extends State<NotesView> {
                   final shouldLogout= await showLogOutDialog(context);
                   if(shouldLogout){
                     await AuthService.firebase().logOut();
+                    //To loginRoute
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         loginRoute,
                             (_) => false
@@ -49,6 +50,7 @@ class _NotesViewState extends State<NotesView> {
   }
 }
 
+//Logout Dialog Box(Logout, Cancel)
 Future<bool> showLogOutDialog(BuildContext context){
   return showDialog<bool>(
       context: context,
