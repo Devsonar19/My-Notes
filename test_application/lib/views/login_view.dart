@@ -3,7 +3,7 @@ import 'package:test_application/services/auth/auth_service.dart';
 
 import '../constants/routes.dart';
 import '../services/auth/auth_exceptions.dart';
-import '../utilities/show_error_dialog.dart';
+import '../utilities/dialogs/error_dialog.dart';
 
 
 //LOGIN VIEW

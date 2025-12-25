@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test_application/services/auth/auth_service.dart';
 
-import 'package:test_application/utilities/show_error_dialog.dart';
-
 import '../constants/routes.dart';
 import '../services/auth/auth_exceptions.dart';
+import '../utilities/dialogs/error_dialog.dart';
 
 
 //REGISTRATION VIEW
