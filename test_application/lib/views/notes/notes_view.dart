@@ -22,7 +22,7 @@ class _NotesViewState extends State<NotesView> {
       AuthService
           .firebase()
           .currentUser!
-          .email!;
+          .email;
 
   @override
   void initState() {
