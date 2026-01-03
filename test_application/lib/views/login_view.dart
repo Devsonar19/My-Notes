@@ -42,40 +42,6 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) async{
-        // if(state is AuthStateLoggedOut){
-        //
-        //   final closeDialog= _closeDialogHandle;
-        //
-        //   if(!state.isLoading && closeDialog!=null){
-        //     closeDialog();
-        //     _closeDialogHandle=null;
-        //   }else if(state.isLoading && closeDialog==null){
-        //     _closeDialogHandle= showLoadingDialog(
-        //       context: context,
-        //       text: 'Loading...',
-        //     );
-        //   }
-        // }
-
-        final closeDialog=_closeDialogHandle;
-        // SHOW loading(modified)
-        if (state is AuthStateLoggedOut) {
-
-          if (closeDialog == null) {
-            _closeDialogHandle = showLoadingDialog(
-              context: context,
-              text: 'Loading...',
-            );
-          }
-          return;
-        }
-        // CLOSE loading for all non-loading states
-        if (closeDialog != null) {
-          closeDialog();
-          _closeDialogHandle = null;
-        }
-
-
 
         if (state is AuthStateLoggedOut) {
           if (state.exception is UserNotFoundAuthException) {
