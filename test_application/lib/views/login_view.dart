@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
 import 'package:test_application/services/auth/bloc/auth_bloc.dart';
 import 'package:test_application/services/auth/bloc/auth_event.dart';
 import 'package:test_application/services/auth/bloc/auth_state.dart';
@@ -54,7 +55,8 @@ class _LoginViewState extends State<LoginView> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Login View'),),
+        appBar: AppBar(title: const Text('Login View'),
+        backgroundColor: Colors.lightBlueAccent,),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -79,6 +81,10 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.green,
+                  ),
                   onPressed: () async {
                     final email = _email.text;
                     final password = _password.text;
@@ -92,6 +98,10 @@ class _LoginViewState extends State<LoginView> {
                   child: const Text('Login'),
                 ),
               TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.redAccent,
+                ),
                 onPressed: () {
                   //To Forgot password view
                   context.read<AuthBloc>().add(
@@ -100,6 +110,10 @@ class _LoginViewState extends State<LoginView> {
                 }, child: const Text('Forgot Password? Click Here'),
               ),
               TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.blue,
+                ),
                 onPressed: () {
                   //To registerRoute
                   context.read<AuthBloc>().add(

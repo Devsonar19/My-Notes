@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_application/helpers/loading/loading_screen.dart';
@@ -12,14 +13,19 @@ import 'package:test_application/views/notes/notes_view.dart';
 import 'package:test_application/views/register_view.dart';
 import 'package:test_application/views/verify_email_view.dart';
 import 'constants/routes.dart';
+import 'firebase_options.dart';
 
 
 //MAIN FUNCTION
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
       home: BlocProvider<AuthBloc>(
         create: (context) => AuthBloc(FirebaseAuthProvider()),
