@@ -55,13 +55,18 @@ class _LoginViewState extends State<LoginView> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Login View'),
-        backgroundColor: Colors.lightBlueAccent,),
+        appBar: AppBar(
+            title: const Text('Login View'),
+            centerTitle: true
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const Text('Please Log into your Account to Get Started'),
+              const SizedBox(
+                height: 50.0,
+                child: Text('Please Log into your Account to Get Started'),
+              ),
               TextField(
                 controller: _email,
                 enableSuggestions: false,
@@ -69,8 +74,12 @@ class _LoginViewState extends State<LoginView> {
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   hintText: 'Enter Your Email: ',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
                 ),
               ),
+              const SizedBox(height: 8.0),
               TextField(
                 controller: _password,
                 obscureText: true,
@@ -78,12 +87,19 @@ class _LoginViewState extends State<LoginView> {
                 autocorrect: false,
                 decoration: const InputDecoration(
                   hintText: 'Enter Your Password: ',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
                 ),
               ),
-              TextButton(
+              const SizedBox(height: 10.0),
+              ElevatedButton(
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    backgroundColor: const Color(0xFF6C63FF),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
                   onPressed: () async {
                     final email = _email.text;
@@ -97,10 +113,13 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: const Text('Login'),
                 ),
-              TextButton(
+              ElevatedButton(
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.redAccent,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.grey,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
                 onPressed: () {
                   //To Forgot password view
@@ -109,10 +128,13 @@ class _LoginViewState extends State<LoginView> {
                   );
                 }, child: const Text('Forgot Password? Click Here'),
               ),
-              TextButton(
+              ElevatedButton(
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.lightBlue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
                 onPressed: () {
                   //To registerRoute

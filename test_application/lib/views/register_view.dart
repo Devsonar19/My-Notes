@@ -55,13 +55,19 @@ class _RegisterViewState extends State<RegisterView> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Register View'),),
+        appBar: AppBar(
+            title: const Text('Register View'),
+            centerTitle: true
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Please Register to Get Started'),
+              const SizedBox(
+                  height: 50.0,
+                  child: Text('Please Register to Get Started'),
+              ),
               TextField(
                 controller: _email,
                 enableSuggestions: false,
@@ -70,8 +76,13 @@ class _RegisterViewState extends State<RegisterView> {
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   hintText: 'Enter Your Email: ',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+
                 ),
               ),
+              const SizedBox(height: 8.0),
               TextField(
                 controller: _password,
                 obscureText: true,
@@ -79,13 +90,17 @@ class _RegisterViewState extends State<RegisterView> {
                 autocorrect: false,
                 decoration: const InputDecoration(
                   hintText: 'Enter Your Password: ',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
                 ),
               ),
+              const SizedBox(height: 10.0),
               //Center the Buttons
               Center(
                 child: Column(
                   children: [
-                    TextButton(
+                    ElevatedButton(
                       onPressed: () async {
                         final email = _email.text;
                         final password = _password.text;
@@ -96,9 +111,20 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                         );
                         const Text('Register on Clicking');
-                      }, child: const Text('Register Here'),
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF6C63FF),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                      ),child: const Text('Register Here')
                     ),
-                    TextButton(
+                    ElevatedButton(
                       onPressed: () {
                         //To loginRoute
                         context.read<AuthBloc>().add(

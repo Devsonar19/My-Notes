@@ -37,6 +37,12 @@ class NotesListView extends StatelessWidget {
               onTap: (){
                 onTap(note);
               },
+              onLongPress: () async{
+                    final shouldDelete= showDeleteDialog(context);
+                    if(await shouldDelete){
+                      onDeleteNote(note);
+                      }
+              },
               title: Text(
                 note.text,
                 maxLines: 1,

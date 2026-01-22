@@ -47,12 +47,17 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Forgot Password'),
+          centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const Text('If you Forgot your Password, enter your email below to receive a password reset link'),
+              const SizedBox(
+                height: 50.0,
+                child: Text('If you Forgot your Password, enter your email below to receive a password reset link'),
+              ),
+              const SizedBox(height: 10),
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
@@ -60,23 +65,40 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 controller: _controller,
                 decoration: const InputDecoration(
                   hintText: 'Enter Your Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
                 ),
               ),
-              TextButton(
+              const SizedBox(height: 10),
+              ElevatedButton(
                   onPressed: (){
                     final email= _controller.text;
                     context
                         .read<AuthBloc>()
                         .add(AuthEventForgotPassword(email: email));
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF6C63FF),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
                   child: const Text('Send Link'),
+
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: (){
                     context.read<AuthBloc>().add(
                       const AuthEventLogOut(),
                     );
                 },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
                 child: const Text('Back'),
               ),
             ],
