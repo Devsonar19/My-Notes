@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path/path.dart';
 import 'package:test_application/services/auth/bloc/auth_bloc.dart';
@@ -8,7 +9,8 @@ import 'package:test_application/utilities/dialogs/loading_dialog.dart';
 import '../constants/routes.dart';
 import '../services/auth/auth_exceptions.dart';
 import '../utilities/dialogs/error_dialog.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 //LOGIN VIEW
 class LoginView extends StatefulWidget {
@@ -54,98 +56,189 @@ class _LoginViewState extends State<LoginView> {
           }
         }
       },
-      child: Scaffold(
-        appBar: AppBar(
-            title: const Text('Login View'),
-            centerTitle: true
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 50.0,
-                child: Text('Please Log into your Account to Get Started'),
+      child: Stack(
+        children: [
+          Positioned.fill(
+              child: Image.asset(
+                'assets/images/pexels-iphotic-3070339.jpg',
+                fit: BoxFit.cover
               ),
-              TextField(
-                controller: _email,
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Your Email: ',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              TextField(
-                controller: _password,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Your Password: ',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10.0),
-              ElevatedButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: const Color(0xFF6C63FF),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+        Scaffold(
+          resizeToAvoidBottomInset: true,
+          backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                      height: 450.0,
+                      width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Text(
+                        'Welcome\nTo \nMy Notes',
+                        style: GoogleFonts.ooohBaby(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 50,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                  onPressed: () async {
-                    final email = _email.text;
-                    final password = _password.text;
-                    context.read<AuthBloc>().add(
-                      AuthEventLogIn(
-                        email,
-                        password,
+                  SizedBox(
+                    height: 80,
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                          'Login to start writing notes...',
+                        style: GoogleFonts.ooohBaby(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white
+                        )
                       ),
-                    );
-                  },
-                  child: const Text('Login'),
-                ),
-              ElevatedButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.grey,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  //To Forgot password view
-                  context.read<AuthBloc>().add(
-                      const AuthEventForgotPassword(),
-                  );
-                }, child: const Text('Forgot Password? Click Here'),
-              ),
-              ElevatedButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.lightBlue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                  TextField(
+                    controller: _email,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    keyboardType: TextInputType.emailAddress,
+                    cursorColor: Colors.white,
+                    style: TextStyle(
+                        color: Colors.white,
+                    ),
+                    decoration:  InputDecoration(
+                      labelText: 'Email',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      suffixIcon: Icon(Icons.email_rounded, color: Colors.white,),
+                      labelStyle: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: GoogleFonts.courgette().fontFamily,
+                        color: Colors.white
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  //To registerRoute
-                  context.read<AuthBloc>().add(
-                      const AuthEventShouldRegister()
-                  );
-                }, child: const Text('Not Registered? Register Here'),
+                  const SizedBox(height: 15.0),
+                  TextField(
+                    controller: _password,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    keyboardType: TextInputType.visiblePassword,
+                    cursorColor: Colors.white,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      suffixIcon: Icon(Icons.password_rounded, color: Colors.white,),
+                      labelStyle: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: GoogleFonts.courgette().fontFamily,
+                        color: Colors.white,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: HexColor('19183B'),
+
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        onPressed: () async {
+                          final email = _email.text;
+                          final password = _password.text;
+                          context.read<AuthBloc>().add(
+                            AuthEventLogIn(
+                              email,
+                              password,
+                            ),
+                          );
+                        },
+                        child: const Text('Login', style: TextStyle(fontSize: 20)),
+                      ),
+                  ),
+                  const SizedBox(height: 5.0),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: HexColor('708993'),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      onPressed: () {
+                        //To Forgot password view
+                        context.read<AuthBloc>().add(
+                            const AuthEventForgotPassword(),
+                        );
+                      }, child: const Text('Forgot Password? Click Here', style: TextStyle(fontSize: 20)),
+                    ),
+                  ),
+                  const SizedBox(height: 5.0),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: HexColor('E7F2EF'),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      onPressed: () {
+                        //To registerRoute
+                        context.read<AuthBloc>().add(
+                            const AuthEventShouldRegister()
+                        );
+                      }, child: const Text('Not Registered? Register Here', style: TextStyle(fontSize: 20)),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
+      ],
       ),
     );
   }
