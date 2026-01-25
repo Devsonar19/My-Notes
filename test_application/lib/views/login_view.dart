@@ -31,6 +31,13 @@ class _LoginViewState extends State<LoginView> {
     _email = TextEditingController();
     _password = TextEditingController();
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.light,
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.dark,
+        )
+    );
   }
 
   @override
@@ -43,7 +50,11 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.light,
+      ),
+    child:  BlocListener<AuthBloc, AuthState>(
       listener: (context, state) async{
 
         if (state is AuthStateLoggedOut) {
@@ -240,6 +251,7 @@ class _LoginViewState extends State<LoginView> {
         ),
       ],
       ),
+    ),
     );
   }
 }
