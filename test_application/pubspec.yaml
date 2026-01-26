@@ -54,5 +54,6 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/images/pexels-iphotic-3070339.jpg
+    - assets/images/login_view_background.jpg
+    - assets/images/register_view_background.jpg
 

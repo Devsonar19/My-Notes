@@ -71,13 +71,13 @@ class _LoginViewState extends State<LoginView> {
         children: [
           Positioned.fill(
               child: Image.asset(
-                'assets/images/pexels-iphotic-3070339.jpg',
+                'assets/images/login_view_background.jpg',
                 fit: BoxFit.cover
               ),
           ),
           Positioned.fill(
             child: Container(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black.withValues(alpha: 0.5),
             ),
           ),
         Scaffold(
