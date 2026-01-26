@@ -132,9 +132,9 @@ class _LoginViewState extends State<LoginView> {
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       suffixIcon: Icon(Icons.email_rounded, color: Colors.white,),
                       labelStyle: TextStyle(
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        fontFamily: GoogleFonts.courgette().fontFamily,
+                        fontFamily: GoogleFonts.birthstone().fontFamily,
                         color: Colors.white
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -163,9 +163,9 @@ class _LoginViewState extends State<LoginView> {
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       suffixIcon: Icon(Icons.password_rounded, color: Colors.white,),
                       labelStyle: TextStyle(
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        fontFamily: GoogleFonts.courgette().fontFamily,
+                        fontFamily: GoogleFonts.birthstone().fontFamily,
                         color: Colors.white,
                       ),
                       enabledBorder: OutlineInputBorder(

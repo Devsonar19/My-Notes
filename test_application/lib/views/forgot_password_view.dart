@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:test_application/services/auth/bloc/auth_bloc.dart';
 import 'package:test_application/services/auth/bloc/auth_state.dart';
 import 'package:test_application/utilities/dialogs/password_reset_email_sent_dialog.dart';
@@ -22,6 +25,13 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   void initState() {
     _controller = TextEditingController();
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.light,
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.dark,
+        )
+    );
   }
   @override
   void dispose() {
@@ -32,7 +42,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.light,
+        ),
+        child:
+        BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
           if(state is AuthStateForgotPassword){
             if(state.hasSentEmail){
@@ -44,69 +59,134 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
             }
           }
         },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Forgot Password'),
-          centerTitle: true,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 50.0,
-                child: Text('If you Forgot your Password, enter your email below to receive a password reset link'),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                autocorrect: false,
-                autofocus: true,
-                controller: _controller,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Your Email',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                  onPressed: (){
-                    final email= _controller.text;
-                    context
-                        .read<AuthBloc>()
-                        .add(AuthEventForgotPassword(email: email));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6C63FF),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+      child: Stack(
+        children:[
+          Positioned.fill(
+            child: Image.asset(
+                'assets/images/forgot_password_view_background.jpg',
+                fit: BoxFit.cover
+            ),
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.6),
+            ),
+          ),
+          Scaffold(
+            resizeToAvoidBottomInset: true,
+            backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 500.0,
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50.0),
+                      child: Text(
+                          'Forgot Password ?\nNo Worries',
+                        style: GoogleFonts.ooohBaby(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 50,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                  child: const Text('Send Link'),
-
-              ),
-              ElevatedButton(
-                onPressed: (){
-                    context.read<AuthBloc>().add(
-                      const AuthEventLogOut(),
-                    );
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                  SizedBox(
+                      height: 40,
+                    width: double.infinity,
+                    child: Text(
+                        'Enter Your Email to Get A Reset Link',
+                      style: GoogleFonts.ooohBaby(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white
+                      ),
+                    ),
                   ),
-                ),
-                child: const Text('Back'),
-              ),
-            ],
+                  TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    autocorrect: false,
+                    autofocus: true,
+                    controller: _controller,
+                    cursorColor: Colors.white,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      suffixIcon: Icon(Icons.email_rounded, color: Colors.white,),
+                      labelStyle: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: GoogleFonts.birthstone().fontFamily,
+                        color: Colors.white,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                        onPressed: (){
+                          final email= _controller.text;
+                          context
+                              .read<AuthBloc>()
+                              .add(AuthEventForgotPassword(email: email));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: HexColor('16476A'),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        child: const Text('Send Link', style: TextStyle(fontSize: 20)),
 
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: (){
+                          context.read<AuthBloc>().add(
+                            const AuthEventLogOut(),
+                          );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: HexColor('2F5755'),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child: const Text('Back', style: TextStyle(fontSize: 20)),
+                    ),
+                  ),
+                ],
+
+              ),
+            ),
           ),
+
         ),
-        
+        ]
       ),
+    ),
     );
   }
 }

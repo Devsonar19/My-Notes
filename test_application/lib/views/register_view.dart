@@ -82,7 +82,7 @@ class _RegisterViewState extends State<RegisterView> {
               ),
           ),
           Scaffold(
-            resizeToAvoidBottomInset: true,
+          resizeToAvoidBottomInset: true,
           backgroundColor: Colors.transparent,
           body: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -135,9 +135,9 @@ class _RegisterViewState extends State<RegisterView> {
                       suffixIcon: Icon(Icons.email_rounded, color: Colors.white,),
                       labelStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        fontFamily: GoogleFonts.courgette().fontFamily,
+                        fontFamily: GoogleFonts.birthstone().fontFamily,
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -165,9 +165,9 @@ class _RegisterViewState extends State<RegisterView> {
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       suffixIcon: Icon(Icons.password_rounded, color: Colors.white,),
                       labelStyle: TextStyle(
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
-                        fontFamily: GoogleFonts.courgette().fontFamily,
+                        fontFamily: GoogleFonts.birthstone().fontFamily,
                         color: Colors.white,
                       ),
                       enabledBorder: OutlineInputBorder(

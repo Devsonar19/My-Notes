@@ -474,7 +474,7 @@
         <entry key="objective_c">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/objective_c-9.2.3/lib" />
+              <option value="$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/objective_c-9.2.4/lib" />
             </list>
           </value>
         </entry>
@@ -985,7 +985,7 @@
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/native_toolchain_c-0.17.4/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/nested-1.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/node_preamble-2.0.2/lib" />
-      <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/objective_c-9.2.3/lib" />
+      <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/objective_c-9.2.4/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/package_config-2.2.0/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/path-1.9.1/lib" />
       <root url="file://$PROJECT_DIR$/../.pub-cache/hosted/pub.dev/path_provider-2.1.5/lib" />
