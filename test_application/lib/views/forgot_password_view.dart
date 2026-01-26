@@ -25,13 +25,6 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   void initState() {
     _controller = TextEditingController();
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.light,
-          statusBarColor: Colors.transparent,
-          statusBarBrightness: Brightness.dark,
-        )
-    );
   }
   @override
   void dispose() {

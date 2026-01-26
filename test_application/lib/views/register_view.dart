@@ -31,13 +31,6 @@ class _RegisterViewState extends State<RegisterView> {
     _email = TextEditingController();
     _password = TextEditingController();
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(
-          statusBarIconBrightness: Brightness.light,
-          statusBarColor: Colors.transparent,
-          statusBarBrightness: Brightness.dark,
-        )
-    );
   }
 
   @override
