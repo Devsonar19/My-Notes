@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 typedef DialogOptionBuilder<T>= Map<String, T?> Function();
 
@@ -13,8 +14,25 @@ Future<T?> showGenericDialog<T>({
       context: context,
       builder: (context){
         return AlertDialog(
-         title: Text(title),
-         content: Text(content),
+          contentPadding: EdgeInsets.all(25),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+         backgroundColor: HexColor('D1D8BE'),
+         title: Text(
+             title,
+           style: TextStyle(
+             fontWeight: FontWeight.bold,
+             fontSize: 30,
+           ),
+         ),
+         content: Text(
+             content,
+           style: TextStyle(
+             fontWeight: FontWeight.bold,
+             fontSize: 17,
+           ),
+         ),
          actions: options.keys.map((optionTitle){
            final T value = options[optionTitle];
            return TextButton(
@@ -25,7 +43,20 @@ Future<T?> showGenericDialog<T>({
                   Navigator.of(context).pop();
                 }
                },
-               child: Text(optionTitle),
+                child: Text(
+                   optionTitle,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                ),
+              style: TextButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+              ),
            );
          }).toList(),
         );
