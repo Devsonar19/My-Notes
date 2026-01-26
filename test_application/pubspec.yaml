@@ -57,4 +57,5 @@ flutter:
     - assets/images/login_view_background.jpg
     - assets/images/register_view_background.jpg
     - assets/images/forgot_password_view_background.jpg
+    - assets/images/verify_email_view_background.jpg
 
