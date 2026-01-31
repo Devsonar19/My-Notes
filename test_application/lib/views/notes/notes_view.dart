@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:test_application/services/cloud/cloud_note.dart';
 import 'package:test_application/services/cloud/firebase_cloud_storage.dart';
 import 'package:test_application/services/crud/notes_service.dart';
@@ -40,14 +41,26 @@ class _NotesViewState extends State<NotesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: HexColor('f2e9e4'),
+      appBar: AppBar(
+        backgroundColor: HexColor('f2e9e4'),
+      ),
       drawer: Drawer(
+        backgroundColor: HexColor('F3E8DF'),
         child: Container(
-          color: Colors.grey,
+          color: Colors.transparent,
           child: ListView(
               children: [
                 Center(
-                  child: DrawerHeader(
+                  child: Container(
+                      height: 150,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide.none,
+                        ),
+                      ),
                       child: Text(
                           'Your Notes',
                         style: TextStyle(
@@ -56,29 +69,42 @@ class _NotesViewState extends State<NotesView> {
                           color: Colors.black,
                           fontFamily: GoogleFonts.ooohBaby().fontFamily,
                         )
-                      )
+                      ),
                   ),
                 ),
-                ListTile(
-                    leading: Icon(Icons.logout_outlined),
-                    title: Text(
-                        'Logout',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        )
+                SizedBox(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ListTile(
+                        leading: Icon(
+                            Icons.logout_outlined,
+                            color: Colors.white,
+                            size: 25,
+                        ),
+                        title: Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )
+                        ),
+                        tileColor: HexColor('22223b'),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        onTap: () async {
+                          final shouldLogout = await showLogOutDialog(context);
+                          if (shouldLogout) {
+                            context.read<AuthBloc>().add(
+                              const AuthEventLogOut(),
+                            );
+                          }
+                        }
                     ),
-
-                    onTap: () async {
-                      final shouldLogout = await showLogOutDialog(context);
-                      if (shouldLogout) {
-                        context.read<AuthBloc>().add(
-                          const AuthEventLogOut(),
-                        );
-                      }
-                    }
+                  ),
                 ),
+
               ],
           ),
         )
@@ -89,6 +115,8 @@ class _NotesViewState extends State<NotesView> {
         },
         icon: const Icon(Icons.add),
         label: const Text('Add Note'),
+        backgroundColor: HexColor('ddbea9'),
+        foregroundColor: Colors.black,
       ),
       body: StreamBuilder(
         stream: _notesService.allNotes(ownerUserId: userId),
