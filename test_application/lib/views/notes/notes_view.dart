@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:test_application/services/cloud/cloud_note.dart';
 import 'package:test_application/services/cloud/firebase_cloud_storage.dart';
 import 'package:test_application/services/crud/notes_service.dart';
@@ -39,30 +40,48 @@ class _NotesViewState extends State<NotesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your Notes'),
-        actions: [
-          PopupMenuButton<MenuAction>(
-            onSelected: (value) async {
-              switch (value) {
-                case MenuAction.logout:
-                  final shouldLogout = await showLogOutDialog(context);
-                  if (shouldLogout) {
-                    context.read<AuthBloc>().add(
-                      const AuthEventLogOut(),
-                    );
-                  }
-                  break;
-              }
-            }, itemBuilder: (context) {
-            return const [
-              PopupMenuItem<MenuAction>(
-                  value: MenuAction.logout,
-                  child: Text('Log out')
-              ),
-            ];
-          },)
-        ],
+      appBar: AppBar(),
+      drawer: Drawer(
+        child: Container(
+          color: Colors.grey,
+          child: ListView(
+              children: [
+                Center(
+                  child: DrawerHeader(
+                      child: Text(
+                          'Your Notes',
+                        style: TextStyle(
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontFamily: GoogleFonts.ooohBaby().fontFamily,
+                        )
+                      )
+                  ),
+                ),
+                ListTile(
+                    leading: Icon(Icons.logout_outlined),
+                    title: Text(
+                        'Logout',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        )
+                    ),
+
+                    onTap: () async {
+                      final shouldLogout = await showLogOutDialog(context);
+                      if (shouldLogout) {
+                        context.read<AuthBloc>().add(
+                          const AuthEventLogOut(),
+                        );
+                      }
+                    }
+                ),
+              ],
+          ),
+        )
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
