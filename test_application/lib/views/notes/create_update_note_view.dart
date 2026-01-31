@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../services/auth/auth_service.dart';
@@ -101,8 +102,9 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HexColor('f2e9e4'),
       appBar: AppBar(
-        title: const Text('New Note'),
+        backgroundColor: HexColor('f2e9e4'),
         actions: [
           IconButton(onPressed: ()async{
             final text= _textController.text;
@@ -111,7 +113,11 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
             }else{
               await Share.share(text);
             }
-          }, icon: Icon(Icons.share)
+          }, icon: Icon(
+            Icons.share_rounded,
+            color: Colors.black,
+            size: 30,
+          )
           ),
         ],
       ),
@@ -127,9 +133,14 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
                     controller: _textController,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                     decoration: InputDecoration(
                       hintText: 'Lets write something...',
-                      fillColor: Colors.grey.shade200,
+                      fillColor: HexColor('ddbea9'),
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
