@@ -5,6 +5,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:test_application/services/cloud/cloud_note.dart';
 import 'package:test_application/services/cloud/firebase_cloud_storage.dart';
 import 'package:test_application/services/crud/notes_service.dart';
+import 'package:test_application/utilities/dialogs/basic_info.dart';
 import 'package:test_application/views/notes/notes_list_view.dart';
 
 import '../../constants/routes.dart';
@@ -44,6 +45,18 @@ class _NotesViewState extends State<NotesView> {
       backgroundColor: HexColor('f2e9e4'),
       appBar: AppBar(
         backgroundColor: HexColor('f2e9e4'),
+        actions: [
+          IconButton(
+              onPressed: ()async{
+                await basicInfoForDelete(context);
+              },
+              icon: Icon(
+                Icons.info_outline_rounded,
+                color: Colors.black,
+                size: 30,
+              )
+          ),
+        ],
       ),
       drawer: Drawer(
         backgroundColor: HexColor('F3E8DF'),
