@@ -8,6 +8,7 @@ import 'package:test_application/services/auth/bloc/auth_state.dart';
 import 'package:test_application/services/auth/firebase_auth_provider.dart';
 import 'package:test_application/views/forgot_password_view.dart';
 import 'package:test_application/views/login_view.dart';
+import 'package:test_application/views/notes/about_dev_view.dart';
 import 'package:test_application/views/notes/create_update_note_view.dart';
 import 'package:test_application/views/notes/notes_view.dart';
 import 'package:test_application/views/register_view.dart';
@@ -32,7 +33,8 @@ void main() {
         child: const HomePage(),
       ),
       routes: {
-        createOrUpdateNoteRoute: (context)=> CreateUpdateNoteView(),
+        createOrUpdateNoteRoute: (context)=> const CreateUpdateNoteView(),
+        aboutDevRoute: (context) => const AboutDevView(),
       },
     ),
   );

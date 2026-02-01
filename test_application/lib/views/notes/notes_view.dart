@@ -75,7 +75,7 @@ class _NotesViewState extends State<NotesView> {
                         ),
                       ),
                       child: Text(
-                          'Your Notes',
+                          'My Notes',
                         style: TextStyle(
                           fontSize: 60,
                           fontWeight: FontWeight.bold,
@@ -117,6 +117,33 @@ class _NotesViewState extends State<NotesView> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ListTile(
+                        leading: const Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                        title: const Text(
+                            'About Developer',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )
+                        ),
+                        tileColor: HexColor('22223b'),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pushNamed(aboutDevRoute);
+                        }
+                    ),
+                  ),
+                ),
 
               ],
           ),
@@ -152,15 +179,13 @@ class _NotesViewState extends State<NotesView> {
                   },
                 );
               }else{
-                return Center(child: const CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             default:
-              return Center(child: const CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
           }
         },
       ),
     );
   }
-  }
-
-
+}
