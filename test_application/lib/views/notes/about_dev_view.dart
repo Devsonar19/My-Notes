@@ -25,7 +25,7 @@ class _AboutDevViewState extends State<AboutDevView> {
               children: [
                 const SizedBox(
                   width: double.infinity,
-                  height: 100,
+                  height: 110,
                   child: Text(
                       'Dev Sonar',
                     style: TextStyle(
@@ -37,7 +37,7 @@ class _AboutDevViewState extends State<AboutDevView> {
                 ),
                 const SizedBox(
                   width: double.infinity,
-                  height: 200,
+                  height: 250,
                   child: Text(
                     "I am a Flutter developer focused on building clean, efficient, and user-friendly applications.This app is the result of over two months of continuous learning and hands-on development.As I continue to grow my skills, I will keep improving and expanding this application.",
                     style: TextStyle(
