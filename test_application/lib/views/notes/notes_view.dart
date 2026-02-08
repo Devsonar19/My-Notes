@@ -144,6 +144,33 @@ class _NotesViewState extends State<NotesView> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ListTile(
+                        leading: const Icon(
+                          Icons.link_sharp,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                        title: const Text(
+                            'References',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )
+                        ),
+                        tileColor: HexColor('22223b'),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pushNamed(referencesRoute);
+                        }
+                    ),
+                  ),
+                ),
 
               ],
           ),

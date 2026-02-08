@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
 import 'package:test_application/helpers/loading/loading_screen.dart';
 import 'package:test_application/services/auth/bloc/auth_bloc.dart';
 import 'package:test_application/services/auth/bloc/auth_event.dart';
@@ -11,6 +12,7 @@ import 'package:test_application/views/login_view.dart';
 import 'package:test_application/views/notes/about_dev_view.dart';
 import 'package:test_application/views/notes/create_update_note_view.dart';
 import 'package:test_application/views/notes/notes_view.dart';
+import 'package:test_application/views/notes/references_view.dart';
 import 'package:test_application/views/register_view.dart';
 import 'package:test_application/views/verify_email_view.dart';
 import 'constants/routes.dart';
@@ -35,6 +37,7 @@ void main() {
       routes: {
         createOrUpdateNoteRoute: (context)=> const CreateUpdateNoteView(),
         aboutDevRoute: (context) => const AboutDevView(),
+        referencesRoute: (context) => const ReferencesView(),
       },
     ),
   );
